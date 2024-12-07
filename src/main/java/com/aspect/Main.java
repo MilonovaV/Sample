@@ -23,10 +23,11 @@ public class Main {
             // Display options to the user
             System.out.println("Choose an option:");
             System.out.println("1. Add Sample");
-            System.out.println("2. Filter Samples");
-            System.out.println("3. Display Samples");
-            System.out.println("4. Analyze Sample");
-            System.out.println("5. Exit");
+            System.out.println("2. Filter Samples by Category");
+            System.out.println("3. Set Category for a Sample");
+            System.out.println("4. Display Samples");
+            System.out.println("5. Analyze Sample");
+            System.out.println("6. Exit");
 
             // Get user choice
             int choice = scanner.nextInt();
@@ -39,39 +40,47 @@ public class Main {
                     String filePath = scanner.nextLine();
                     controller.addSample(filePath);
                     break;
-
+            
                 case 2:
                     // Filter Samples
                     System.out.print("Enter the category to filter by: ");
                     String category = scanner.nextLine();
                     controller.filterSamples(category);
                     break;
-
+            
                 case 3:
+                    // Set Category for a specific sample
+                    System.out.print("Enter the filename of the sample to categorize: ");
+                    String sampleFilename = scanner.nextLine();
+                    System.out.print("Enter the category to set: ");
+                    String newCategory = scanner.nextLine();
+                    controller.setCategory(sampleFilename, newCategory);
+                    break;
+            
+                case 4:
                     // Display Samples
                     controller.displaySamples();
                     break;
-
-                case 4:
+            
+                case 5:
                     // Analyze Sample
                     System.out.print("Enter the sample filename to analyze: ");
-                    String sampleFilename = scanner.nextLine();
-                    controller.analyzeSample(sampleFilename);
+                    String analyzeSampleFilename = scanner.nextLine();
+                    controller.analyzeSample(analyzeSampleFilename);
                     break;
-
-                case 5:
+            
+                case 6:
                     // Exit the program
                     System.out.println("Exiting the program.");
                     scanner.close();
                     return;
-
+            
                 default:
                     // Invalid input
                     System.out.println("Invalid option, please try again.");
                     break;
             }
-
-            // Add a line break for better readability between operations
+            
             System.out.println("\n");
         }
     }

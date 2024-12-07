@@ -23,11 +23,16 @@ public aspect PreprocessingAspect {
     }
 
     // Preprocess sample before analysis
-    pointcut analyzeSampleCall(String sample) : execution(* MalwareAnalysis.analyzeSample(..)) && args(sample);
+    pointcut analyzeSampleCall(Sample sample) : execution(* MalwareAnalysis.analyzeSample(..)) && args(sample);
 
-    void around(String sample) : analyzeSampleCall(sample) {
+    void around(Sample sample) : analyzeSampleCall(sample) {
         System.out.println("PreprocessingAspect: Preprocessing sample before analysis.");
-        String preprocessedSample = sample.trim().toLowerCase();
-        proceed(preprocessedSample);  
+        if (!sample.isPreprocessed()) {
+            String preprocessedSample = sample.getSampleData().trim().toLowerCase();
+            sample.setPreprocessedSample(preprocessedSample);
+            sample.setPreprocessed(true);   
+        }
+
+        proceed(sample);  
     }
 }

@@ -33,8 +33,13 @@ public class MainController {
     }
 
     public void analyzeSample(String file) {
-        String sample = model.getSample(file);
+        Sample sample = model.getSample(file);
         analysis.analyzeSample(sample);
+    }
+
+    public void setCategory(String file, String category) {
+        Sample sample = model.getSample(file);
+        sample.setCategory(category);
     }
 }
 
