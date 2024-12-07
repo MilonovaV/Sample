@@ -2,10 +2,10 @@ package com.aspect;
 import java.util.List;
 
 public class Viewer {
-    public void displaySamples(List<String> samples) {
-        System.out.println("Displaying malware samples:");
-        for (String sample : samples) {
-            System.out.println("- " + sample);
+    public void displaySamples(List<Sample> samples) {
+        System.out.println("Displaying all malware samples:");
+        for (Sample sample : samples) {
+            System.out.println(sample.getFilename());
         }
     }
 

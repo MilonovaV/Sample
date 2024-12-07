@@ -1,5 +1,8 @@
 package com.aspect;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MainController {
     private MalwareData model;
@@ -12,21 +15,25 @@ public class MainController {
         this.viewer = viewer;
     }
 
-    public void addSample(String sample) {
-        model.addSample(sample);
+    public void addSample(String filePath) throws Exception {
+        String sample = Files.lines(Paths.get(filePath))
+                                     .collect(Collectors.joining("\n"));
+        String filename = Paths.get(filePath).getFileName().toString();
+        model.addSample(sample, filename);
     }
 
     public void displaySamples() {
-        List<String> samples =  model.getSamples();
+        List<Sample> samples =  model.getFullSamples();
         this.viewer.displaySamples(samples);
     }
 
     public void filterSamples(String category) {
-        List<String> samples =  model.filterSamples(category);;
+        List<Sample> samples =  model.filterSamples(category);
         this.viewer.displaySamples(samples);
     }
 
-    public void analyzeSample(String sample) {
+    public void analyzeSample(String file) {
+        String sample = model.getSample(file);
         analysis.analyzeSample(sample);
     }
 }

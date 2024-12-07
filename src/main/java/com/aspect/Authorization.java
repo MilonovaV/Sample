@@ -5,6 +5,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
+import java.io.Console;
+
 import io.github.cdimascio.dotenv.Dotenv;
 
 public class Authorization {
@@ -21,5 +23,18 @@ public class Authorization {
         Dotenv dotenv = Dotenv.load();
         String storedHashedPassword = dotenv.get("passwd");
         return hashedEnteredPassword.equals(storedHashedPassword);
+    }
+
+    public static void login(SecurityAspect securityAspect)throws NoSuchAlgorithmException {
+        Console cnsl = System.console();
+        String enteredPassword = cnsl.readLine("Enter password : ");
+        boolean isPasswordValid = verifyPassword(enteredPassword);
+        if (isPasswordValid){
+            securityAspect.authorize();
+            System.out.println("Authorization successful");
+        }
+        else{
+            System.out.println("Authorization failed");
+        }
     }
 }

@@ -1,49 +1,78 @@
 package com.aspect;
 
 import java.io.Console;
+import java.util.Scanner;
 import java.security.NoSuchAlgorithmException;
 
-import kotlin.internal.Exact;
-
 public class Main {
-    public static void main(String[] args) throws NoSuchAlgorithmException {
-        // MalwareData model = new MalwareData();
-        // MalwareAnalysis analysis = new MalwareAnalysis();
-        // Viewer viewer = new Viewer();
-        // MainController controller = new MainController(model, analysis, viewer);
+    public static void main(String[] args) throws NoSuchAlgorithmException, Exception {
 
-        // SecurityAspect securityAspect = SecurityAspect.aspectOf();
-
-        // // Attempt actions without authorization (should be blocked)
-        // System.out.println("=== Unauthorized Attempts ===");
-        // controller.addSample("SensitiveSample");
-        // controller.filterSamples("Category1");
-        // controller.displaySamples();
-        // controller.analyzeSample("SensitiveSample");
-        // System.out.println("\n");
-
-        // // Authorize and retry actions
-        // System.out.println("\n=== Authorized Actions ===");
-        // securityAspect.authorize();
-
-        // // Add and analyze samples
-        // controller.addSample("SensitiveSample");
-        // controller.displaySamples();
-        // controller.filterSamples("Category1");
-        // controller.analyzeSample("SensitiveSample");
-        // System.out.println("\n");
-        // throw new NullPointerException("Value cannot be null");
-
-
-        Console cnsl = System.console();
+        // Initialize the required classes
         SecurityAspect securityAspect = SecurityAspect.aspectOf();
+        Authorization.login(securityAspect);
 
-        String enteredPassword = cnsl.readLine( 
-            "Enter password : ");
+        MalwareData model = new MalwareData();
+        MalwareAnalysis analysis = new MalwareAnalysis();
+        Viewer viewer = new Viewer();
+        MainController controller = new MainController(model, analysis, viewer);
 
-        boolean isPasswordValid = Authorization.verifyPassword(enteredPassword);
-        if (isPasswordValid){
-            securityAspect.authorize();
+        // Display the menu and handle user input
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            // Display options to the user
+            System.out.println("Choose an option:");
+            System.out.println("1. Add Sample");
+            System.out.println("2. Filter Samples");
+            System.out.println("3. Display Samples");
+            System.out.println("4. Analyze Sample");
+            System.out.println("5. Exit");
+
+            // Get user choice
+            int choice = scanner.nextInt();
+            scanner.nextLine();  // Consume newline left by nextInt()
+
+            switch (choice) {
+                case 1:
+                    // Add Sample
+                    System.out.print("Enter the file path of the sample to add: ");
+                    String filePath = scanner.nextLine();
+                    controller.addSample(filePath);
+                    break;
+
+                case 2:
+                    // Filter Samples
+                    System.out.print("Enter the category to filter by: ");
+                    String category = scanner.nextLine();
+                    controller.filterSamples(category);
+                    break;
+
+                case 3:
+                    // Display Samples
+                    controller.displaySamples();
+                    break;
+
+                case 4:
+                    // Analyze Sample
+                    System.out.print("Enter the sample filename to analyze: ");
+                    String sampleFilename = scanner.nextLine();
+                    controller.analyzeSample(sampleFilename);
+                    break;
+
+                case 5:
+                    // Exit the program
+                    System.out.println("Exiting the program.");
+                    scanner.close();
+                    return;
+
+                default:
+                    // Invalid input
+                    System.out.println("Invalid option, please try again.");
+                    break;
+            }
+
+            // Add a line break for better readability between operations
+            System.out.println("\n");
         }
     }
 }

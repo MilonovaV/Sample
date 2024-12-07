@@ -19,7 +19,7 @@ public aspect PreprocessingAspect {
         }
         byte[] anonymized = md.digest(sample.getBytes());
         String result = new String(anonymized, StandardCharsets.UTF_8);
-        proceed(result);  // Pass anonymized sample to addSample
+        proceed(result);  
     }
 
     // Preprocess sample before analysis
@@ -28,6 +28,6 @@ public aspect PreprocessingAspect {
     void around(String sample) : analyzeSampleCall(sample) {
         System.out.println("PreprocessingAspect: Preprocessing sample before analysis.");
         String preprocessedSample = sample.trim().toLowerCase();
-        proceed(preprocessedSample);  // Pass preprocessed sample to analyzeSample
+        proceed(preprocessedSample);  
     }
 }

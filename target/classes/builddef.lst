@@ -10,10 +10,12 @@
 /Users/vanesa/Documents/Skola/ING-3semester/AOP/mini-projekt/miniprojekt/target/classes
 -s
 /Users/vanesa/Documents/Skola/ING-3semester/AOP/mini-projekt/miniprojekt/target/generated-sources/aspectj-maven-plugin
+/Users/vanesa/Documents/Skola/ING-3semester/AOP/mini-projekt/miniprojekt/src/main/java/com/aspect/PerformanceMonitoringAspect.aj
 /Users/vanesa/Documents/Skola/ING-3semester/AOP/mini-projekt/miniprojekt/src/main/java/com/aspect/MalwareData.java
 /Users/vanesa/Documents/Skola/ING-3semester/AOP/mini-projekt/miniprojekt/src/main/java/com/aspect/MalwareAnalysis.java
 /Users/vanesa/Documents/Skola/ING-3semester/AOP/mini-projekt/miniprojekt/src/main/java/com/aspect/SecurityAspect.aj
 /Users/vanesa/Documents/Skola/ING-3semester/AOP/mini-projekt/miniprojekt/src/main/java/com/aspect/LoggingAspect.aj
+/Users/vanesa/Documents/Skola/ING-3semester/AOP/mini-projekt/miniprojekt/src/main/java/com/aspect/Sample.java
 /Users/vanesa/Documents/Skola/ING-3semester/AOP/mini-projekt/miniprojekt/src/main/java/com/aspect/MainController.java
 /Users/vanesa/Documents/Skola/ING-3semester/AOP/mini-projekt/miniprojekt/src/main/java/com/aspect/MalwareProcessor.java
 /Users/vanesa/Documents/Skola/ING-3semester/AOP/mini-projekt/miniprojekt/src/main/java/com/aspect/Authorization.java
