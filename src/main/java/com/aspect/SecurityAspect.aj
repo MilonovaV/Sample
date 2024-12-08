@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 public aspect SecurityAspect {
-    private boolean isAuthorized = false;  // mock flag - for authorization
+    private boolean isAuthorized = false; 
+    private static final Logger logger = Logger.getLogger(LoggingAspect.class.getName());
 
     pointcut securedCall() : 
         call(* MainController.addSample(..)) || 
@@ -20,7 +23,7 @@ public aspect SecurityAspect {
             Class<?> returnType = methodSignature.getReturnType();
             String methodName = methodSignature.getName();
 
-            System.out.println("SecurityAspect: Unauthorized access detected! Blocking access for: " + methodName);
+            logger.log(Level.WARNING,"SecurityAspect: Unauthorized access detected! Blocking access for: " + methodName);
             
             if (returnType.equals(void.class)) {
                 return null;  

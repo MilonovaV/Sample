@@ -10,7 +10,6 @@ public aspect PreprocessingAspect {
     pointcut uploadSampleCall(String sample) : execution(* MalwareData.uploadSample(..)) && args(sample);
 
     void around(String sample) : uploadSampleCall(sample) {
-        System.out.println("PreprocessingAspect: Anonymizing sample before upload.");
         MessageDigest md;
         try {
             md = MessageDigest.getInstance("MD5");
@@ -26,7 +25,6 @@ public aspect PreprocessingAspect {
     pointcut analyzeSampleCall(Sample sample) : execution(* MalwareAnalysis.analyzeSample(..)) && args(sample);
 
     void around(Sample sample) : analyzeSampleCall(sample) {
-        System.out.println("PreprocessingAspect: Preprocessing sample before analysis.");
         if (!sample.isPreprocessed()) {
             String preprocessedSample = sample.getSampleData().trim().toLowerCase();
             sample.setPreprocessedSample(preprocessedSample);

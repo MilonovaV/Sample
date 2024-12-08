@@ -1,4 +1,5 @@
 package com.aspect;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -32,7 +33,7 @@ public class MainController {
         this.viewer.displaySamples(samples);
     }
 
-    public void analyzeSample(String file) {
+    public void analyzeSample(String file) throws IOException, InterruptedException{
         Sample sample = model.getSample(file);
         analysis.analyzeSample(sample);
     }
