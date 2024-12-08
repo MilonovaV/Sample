@@ -9,13 +9,10 @@ public aspect PreprocessingAspect {
     // Anonymize sample before uploading
     pointcut uploadSampleCall(String sample) : execution(* MalwareData.uploadSample(..)) && args(sample);
 
-    void around(String sample) : uploadSampleCall(sample) {
+    void around(String sample) throws IllegalArgumentException : uploadSampleCall(sample) {
         MessageDigest md;
-        try {
-            md = MessageDigest.getInstance("MD5");
-        } catch (NoSuchAlgorithmException e) {
-            throw new IllegalArgumentException(e);
-        }
+        md = MessageDigest.getInstance("MD5");
+
         byte[] anonymized = md.digest(sample.getBytes());
         String result = new String(anonymized, StandardCharsets.UTF_8);
         proceed(result);  

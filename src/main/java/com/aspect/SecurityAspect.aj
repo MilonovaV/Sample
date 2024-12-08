@@ -13,7 +13,6 @@ public aspect SecurityAspect {
 
     pointcut securedCall() : 
         call(* MainController.addSample(..)) || 
-        call(* MainController.displaySamples(..)) || 
         call(* MainController.filterSamples(..)) || 
         call(* MainController.analyzeSample(..));
 
@@ -23,7 +22,7 @@ public aspect SecurityAspect {
             Class<?> returnType = methodSignature.getReturnType();
             String methodName = methodSignature.getName();
 
-            logger.log(Level.WARNING,"SecurityAspect: Unauthorized access detected! Blocking access for: " + methodName);
+            logger.log(Level.S,"SecurityAspect: Unauthorized access detected! Blocking access for: " + methodName);
             
             if (returnType.equals(void.class)) {
                 return null;  
